@@ -24,4 +24,9 @@ class Category extends Model
             ]
         ];
     }
+
+    public static function getCategories()
+    {
+        return self::all();
+    }
 }
