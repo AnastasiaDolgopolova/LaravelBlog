@@ -236,6 +236,6 @@ class Post extends Model
 
     public static function getRecentPosts()
     {
-        return self::orderBy('date','desc')->take(4)->get()
+        return self::orderBy('date','desc')->take(4)->get();
     }
 }
