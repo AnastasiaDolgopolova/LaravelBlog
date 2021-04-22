@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function author()
@@ -237,5 +243,10 @@ class Post extends Model
     public static function getRecentPosts()
     {
         return self::orderBy('date','desc')->take(4)->get();
+    }
+
+    public function getComments()
+    {
+        return $this->comments()->where('status',1)->get();
     }
 }
