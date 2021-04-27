@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(3);
+        $posts = Post:: where('status',Post::IS_PUBLIC)->paginate(3);
 
         return view('pages.index')->with('posts', $posts);
     }
@@ -20,6 +20,7 @@ class HomeController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+        $post->increment('views',1);
 
         return view('pages.show', compact('post'));
     }

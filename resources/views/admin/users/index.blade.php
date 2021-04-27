@@ -36,6 +36,8 @@
                             <th>Имя</th>
                             <th>E-mail</th>
                             <th>Аватар</th>
+                            <th width="7%">Бан/разбан</th>
+                            <th width="7%">Админ</th>
                             <th>Действия</th>
                         </tr>
                     </thead>
@@ -47,6 +49,18 @@
                             <td>{{$user->email}}</td>
                             <td>
                                 <img src="{{ $user->getAvatar() }}" alt="" class="img-responsive" width="150">
+                            </td>
+                            <td>@if ($user->status == 1)
+                                <a href="/admin/users/toggle/{{ $user->id }}" class="fa fa-lock"></a>
+                                @else
+                                <a href="/admin/users/toggle/{{ $user->id }}" class="fa fa-thumbs-o-up"></a>
+                                @endif
+                            </td>
+                            <td>@if ($user->is_admin == 1)
+                                <a href="/admin/users/is_admin/{{ $user->id }}" class="fa fa-thumbs-o-up"></a>
+                                @else
+                                <a href="/admin/users/is_admin/{{ $user->id }}" class="fa fa-lock"></a>
+                                @endif
                             </td>
                             <td><a href="{{ route('users.edit', $user->id) }}" class="fa fa-pencil"></a>
                                 {{ Form::open(['route'=>['users.destroy',$user->id], 'method'=>'delete']) }}

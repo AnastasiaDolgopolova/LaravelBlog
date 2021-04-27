@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('pages.profile', ['user' => $user]);
+        return view('user.profile', ['user' => $user]);
     }
 
     public function store(Request $request)

@@ -111,6 +111,22 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function toggleStatus($id)
+    {
+        $user = User::find($id);
+        $user->toggleBan();
+
+        return redirect()->back();
+    }
+
+    public function toggleAdmin($id)
+    {
+        $user = User::find($id);
+        $user->toggleAdmin();
+
+        return redirect()->back();
+    }
+
     public function destroy($id)
     {
         User::find($id)->remove();

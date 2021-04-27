@@ -6,7 +6,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-
+                <div class="panel-group">
+                    <div class="btn-group">
+                        <a href="{{route('posts.create')}}" class="btn btn-primary">Мои статьи</a>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <div class="pull-right">
+                            <a href="{{route('posts.create')}}" class="btn btn-success">+ Создать статью</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="leave-comment mr0">
                     <!--leave comment-->
                     <h3 class="text-uppercase">My profile</h3>

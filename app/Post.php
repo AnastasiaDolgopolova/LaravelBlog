@@ -6,6 +6,7 @@ namespace App;
 use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -14,8 +15,8 @@ class Post extends Model
 {
     use Sluggable;
 
-    const IS_DRAFT = 0;
-    const IS_PUBLIC = 1;
+    const IS_DRAFT = 1;
+    const IS_PUBLIC = 0;
 
     protected $fillable = ['title', 'content', 'date', 'description'];
     
@@ -57,6 +58,7 @@ class Post extends Model
     {
         $post = new static;
         $post->fill($fields);
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         return $post;
@@ -129,14 +131,13 @@ class Post extends Model
         $this->save();
     }
 
-    public function toggleStatus($value)
+    public function toggleStatus()
     {
-        if($value == null)
+        if($this->status == 1)
         {
-            return $this->setDraft();
+            return $this->setPublic();
         }
-
-        return $this->setPublic();
+        return $this->setDraft();
     }
 
     public function setFeatured()
@@ -151,9 +152,9 @@ class Post extends Model
         $this->save();
     }
 
-    public function toggleFeatured($value)
+    public function toggleFeatured()
     {
-        if($value == null)
+        if($this->is_featured == 1)
         {
             return $this->setStandart();
         }
@@ -200,7 +201,10 @@ class Post extends Model
 
     public function hasPrevious()
     {
-        return self::where('id', '<', $this->id)->max('id');
+        return self::where([
+            ['id', '<', $this->id],
+            ['status',Post::IS_PUBLIC]
+            ])->max('id');
     }
 
     public function getPrevious()
@@ -211,7 +215,10 @@ class Post extends Model
 
     public function hasNext()
     {
-        return self::where('id', '>', $this->id)->min('id');
+        return self::where([
+            ['id', '>', $this->id],
+            ['status',Post::IS_PUBLIC]
+            ])->min('id');
     }
 
     public function getNext()
@@ -222,7 +229,7 @@ class Post extends Model
 
     public function related()
     {
-        return self::all()->except($this->id);
+        return self::all()->where('status',Post::IS_PUBLIC)->except($this->id);
     }
 
     public function hasCategory()
@@ -232,17 +239,20 @@ class Post extends Model
 
     public static function getPopularPosts()
     {
-        return self::orderBy('views','desc')->take(3)->get();
+        return self::where('status',Post::IS_PUBLIC)->orderBy('views','desc')->take(3)->get();
     }
 
     public static function getFeaturedPosts()
     {
-        return self::where('is_featured',1)->take(3)->get();
+        return self::where([
+            ['is_featured',1],
+            ['status',Post::IS_PUBLIC]
+            ])->take(3)->get();
     }
 
     public static function getRecentPosts()
     {
-        return self::orderBy('date','desc')->take(4)->get();
+        return self::where('status',Post::IS_PUBLIC)->orderBy('date','desc')->take(4)->get();
     }
 
     public function getComments()

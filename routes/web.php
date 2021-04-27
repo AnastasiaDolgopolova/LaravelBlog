@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@store');
     Route::post('/comment', 'CommentsController@store');
+    Route::resource('/my_posts','PostsController');
 });
 
 Route::middleware(['guest'])->group(function () {
@@ -40,7 +41,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware' => 'admin'], 
     Route::resource('/categories','CategoriesController');
     Route::resource('/tags','TagsController');
     Route::resource('/users','UsersController');
+    Route::get('/users/toggle/{id}', 'UsersController@toggleStatus');
+    Route::get('/users/is_admin/{id}', 'UsersController@toggleAdmin');
     Route::resource('/posts','PostsController');
+    Route::get('/posts/toggle/{id}', 'PostsController@toggleStatus');
+    Route::get('/posts/is_featured/{id}', 'PostsController@toggleFeatured');
     Route::get('/comments', 'CommentsController@index');
     Route::get('/comments/toggle/{id}', 'CommentsController@toggle');
     Route::delete('/comments/{id}/destroy', 'CommentsController@destroy')->name('comments.destroy');
