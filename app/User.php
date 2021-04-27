@@ -64,6 +64,7 @@ class User extends Authenticatable
     public function edit($fields)
     {
         $this->fill($fields); //name,email
+        $this->mood = $fields['mood'];
         
         $this->save();
     }

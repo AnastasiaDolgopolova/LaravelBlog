@@ -8,11 +8,11 @@
             <div class="col-md-8">
                 <div class="panel-group">
                     <div class="btn-group">
-                        <a href="{{route('posts.create')}}" class="btn btn-primary">Мои статьи</a>
+                        <a href="{{ route('my_posts.index') }}" class="btn btn-primary">Мои статьи</a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="pull-right">
-                            <a href="{{route('posts.create')}}" class="btn btn-success">+ Создать статью</a>
+                            <a href="{{route('my_posts.create')}}" class="btn btn-success">+ Создать статью</a>
                         </div>
                     </div>
                 </div>
@@ -35,6 +35,12 @@
                             <div class="col-md-12">
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Email"
                                     value="{{ $user->email }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="mood" name="mood" placeholder="Status"
+                                    value="{{ $user->mood }}">
                             </div>
                         </div>
                         <div class="form-group">

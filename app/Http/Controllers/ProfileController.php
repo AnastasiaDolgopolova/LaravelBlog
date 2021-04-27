@@ -24,6 +24,7 @@ class ProfileController extends Controller
                 'email',
                 Rule::unique('users')->ignore(Auth::user()->id)
             ],
+            'mood' => 'required',
             'avatar' => 'nullable|image'
         ]);
 

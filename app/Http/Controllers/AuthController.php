@@ -43,9 +43,14 @@ class AuthController extends Controller
             'password' => $request->get('password')
             ]))
             {
-                return redirect('/');
+                if(Auth::user()->status == 1){
+                    Auth::logout();
 
+                    return redirect('/login')->with('status', 'Внимание! Ваш пользовательский статус - Забанен');
+                }
+                return redirect('/');
             }
+                    
             return redirect()->back()->with('status', 'Неправильный логин или пароль');
     }
 
