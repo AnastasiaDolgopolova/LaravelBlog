@@ -38,7 +38,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="/images/logo.png" alt=""></a>
+                    <a class="navbar-brand waves-effect" href="/">
+                        <strong class="text-primary">My Blog</strong>
+                    </a>
                 </div>
 
 

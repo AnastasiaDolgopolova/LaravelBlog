@@ -19,14 +19,6 @@
                 <!--leave comment-->
                 <div class="leave-comment mr0">
                     <div class="content-wrapper">
-                        <!-- Content Header (Page header) -->
-                        <section class="content-header">
-                            <h1>
-                                Изменить статью
-                                <small>приятные слова..</small>
-                            </h1>
-                        </section>
-
                         <!-- Main content -->
                         <section class="content">
                             {!! Form::open([
@@ -37,7 +29,7 @@
                             <!-- Default box -->
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Обновляем статью</h3>
+                                    <h1 class="box-title">Изменить статью</h1>
                                     @include('admin.errors')
                                 </div>
                                 <div class="box-body">
@@ -122,7 +114,7 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer col-md-12">
-                                    <a href="{{ route('posts.index') }}" class="btn btn-default">Назад</a>
+                                    <a href="{{ route('my_posts.index') }}" class="btn btn-default">Назад</a>
                                     <button class="btn btn-warning pull-right">Изменить</button>
                                 </div>
                                 <!-- /.box-footer-->
