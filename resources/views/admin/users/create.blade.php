@@ -34,6 +34,11 @@
                             value="{{ old('email') }}">
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail1">Статус</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" name="mood"
+                            value="{{ old('mood') }}">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail1">Пароль</label>
                         <input type="password" name="password" class="form-control" id="exampleInputEmail1"
                             placeholder="">

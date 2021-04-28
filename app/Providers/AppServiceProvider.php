@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Post;
 use App\Comment;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('admin._sitebar', function ($view) {
             $view->with('newCommentsCount', Comment::getNewCommentsCount());
+        });
+        view()->composer('admin.layout', function ($view) {
+            $view->with('admin', Auth::user());
         });
     }
 }

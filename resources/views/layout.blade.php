@@ -8,7 +8,7 @@
 
     <!-- favicon icon -->
 
-    <title>Blog</title>
+    <title>My Blog</title>
 
     <!-- common css -->
     <link rel="stylesheet" href="/css/front.css">
@@ -56,6 +56,9 @@
                         @if (Auth::check())
                         <li><a href="/profile">My profile</a></li>
                         <li><a href="/logout">Logout</a></li>
+                        @if (Auth::user()->is_admin)
+                        <li><a href="/admin">Admin panel</a></li>
+                        @endif
                         @else
                         <li><a href="/register">Register</a></li>
                         <li><a href="/login">Login</a></li>
